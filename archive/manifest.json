@@ -1,0 +1,56 @@
+[
+  {
+    "source": "HOTLINE CIRCLES ПОСЛЕДНЯЯ ВЕРСИЯ.html",
+    "path": "archive/originals/HOTLINE CIRCLES ПОСЛЕДНЯЯ ВЕРСИЯ.html",
+    "bytes": 307501,
+    "sha256": "b22d8c7c49950f8e924f80448f4604faa93f3ec12d5baf143a16278d7ea0a52e"
+  },
+  {
+    "source": "README-2.md",
+    "path": "archive/originals/README-2.md",
+    "bytes": 3473,
+    "sha256": "4ad0cd00b6785f2a21737aa155eabad0ccf4c9fd311d6ad632986feca2e521da"
+  },
+  {
+    "source": "README.md",
+    "path": "archive/originals/README.md",
+    "bytes": 793,
+    "sha256": "874e486faeaa2948829f57ba663df8a6586c84dd86456851f3bb838ee562c6a9"
+  },
+  {
+    "source": "game.py",
+    "path": "archive/originals/game.py",
+    "bytes": 891,
+    "sha256": "8aa3ce6de8483a57b91fe26c88ba84cfd4c2a64dffe3d490218a6cd9d98735a1"
+  },
+  {
+    "source": "index-2.html",
+    "path": "archive/originals/index-2.html",
+    "bytes": 192163,
+    "sha256": "d1853d2414c20ac3376e061275f39f2c7c35dbc0feec31a22ce5726f2e83f1af"
+  },
+  {
+    "source": "index-old-version.html",
+    "path": "archive/originals/index-old-version.html",
+    "bytes": 192163,
+    "sha256": "d1853d2414c20ac3376e061275f39f2c7c35dbc0feec31a22ce5726f2e83f1af"
+  },
+  {
+    "source": "index.html",
+    "path": "archive/originals/index.html",
+    "bytes": 307537,
+    "sha256": "aa9be36ebd444e4236ba04f3b43b681faa0df1f591d73f3c5eb66f9be4f56f81"
+  },
+  {
+    "source": "warn-HotlineCircles.txt",
+    "path": "archive/build-reports/warn-HotlineCircles.txt",
+    "bytes": 12293,
+    "sha256": "0f193557a9b666404aa7f9599e7aab1d8a4812aa1bbc000d2d9a3aba26dbbca7"
+  },
+  {
+    "source": "xref-HotlineCircles.html",
+    "path": "archive/build-reports/xref-HotlineCircles.html",
+    "bytes": 904802,
+    "sha256": "3849238480bfbddea54fcd0d6134fb89ea5562237d81f59c6049e3f54912bd97"
+  }
+]

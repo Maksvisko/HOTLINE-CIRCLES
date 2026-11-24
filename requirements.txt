@@ -1,0 +1,2 @@
+# Optional desktop launcher; the browser game has no Python dependencies.
+pywebview>=5,<7
