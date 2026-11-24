@@ -1,0 +1,58 @@
+name: Publish game to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check project before publishing
+        run: |
+          python tools/check_project.py
+          python -m unittest discover -s tests -v
+      - uses: actions/configure-pages@v5
+      - name: Prepare game files only
+        run: |
+          mkdir -p _site/src _site/audio
+          cp index.html _site/index.html
+          cp src/game.js src/styles.css _site/src/
+          # Music is optional. Do not publish READMEs or historical build reports.
+          find audio -maxdepth 1 -type f -name '*.mp3' -exec cp {} _site/audio/ \;
+          test -s _site/index.html
+          test -s _site/src/game.js
+          test -s _site/src/styles.css
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy game
+        id: deployment
+        uses: actions/deploy-pages@v4
