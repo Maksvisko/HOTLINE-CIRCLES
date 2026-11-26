@@ -33,7 +33,6 @@ class ProjectChecks(unittest.TestCase):
     def setUpClass(cls):
         cls.html = (ROOT / 'index.html').read_text(encoding='utf-8')
         cls.js = (ROOT / 'src/game.js').read_text(encoding='utf-8')
-        cls.original = (ROOT / 'archive/originals/index.html').read_text(encoding='utf-8')
         cls.page = PageParser()
         cls.page.feed(cls.html)
 
@@ -46,17 +45,19 @@ class ProjectChecks(unittest.TestCase):
                 self.assertEqual(len(data), entry['bytes'])
                 self.assertEqual(hashlib.sha256(data).hexdigest(), entry['sha256'])
 
-    def test_initial_extraction_preserves_game_logic(self):
-        # Baseline guard: update deliberately when gameplay work starts.
-        original_js = self.original.split('    <script>', 1)[1].split('    </script>', 1)[0]
-        self.assertEqual(self.js, original_js)
+    def test_single_campaign_and_script_order(self):
+        choices = re.findall(r'onclick="selectLevelForCharacterChoice\((\d+)\)"', self.html)
+        self.assertEqual(choices, ['0', '1', '2', '3', '4', '5'])
+        scripts = re.findall(r'<script src="([^"]+)"', self.html)
+        self.assertEqual(scripts, ['src/world.js', 'src/levels.js', 'src/effects.js', 'src/game.js'])
+        for removed in ('chapter2', 'hotrod', 'skyward', 'skyler', 'mesh_dual', 'levelGrid2'):
+            self.assertNotIn(removed.lower(), (self.html + self.js).lower())
 
-    def test_initial_extraction_preserves_styles(self):
-        original_css = self.original.split('<style>', 1)[1].split('</style>', 1)[0]
+    def test_local_hud_styles(self):
         css = (ROOT / 'src/styles.css').read_text(encoding='utf-8')
-        self.assertTrue(css.startswith(original_css))
         for utility in ('.flex {', '.flex-col {', '.leading-tight {'):
             self.assertIn(utility, css)
+        self.assertNotIn('.chapter-arrow', css)
 
     def test_unique_dom_ids(self):
         self.assertEqual(len(self.page.ids), len(set(self.page.ids)))
@@ -81,7 +82,12 @@ class ProjectChecks(unittest.TestCase):
                 self.assertTrue((ROOT / asset).is_file(), asset)
 
     def test_javascript_syntax(self):
-        subprocess.run(['node', '--check', str(ROOT / 'src/game.js')], check=True)
+        for script in (ROOT / 'src').glob('*.js'):
+            subprocess.run(['node', '--check', str(script)], check=True)
+
+    def test_gameplay_regressions(self):
+        scripts = sorted((ROOT / 'tests').glob('*.test.cjs'))
+        subprocess.run(['node', '--test', *map(str, scripts)], check=True, cwd=ROOT)
 
 
 if __name__ == '__main__':

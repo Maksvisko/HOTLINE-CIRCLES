@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p _site/src _site/audio
           cp index.html _site/index.html
-          cp src/game.js src/styles.css _site/src/
+          cp src/*.js src/styles.css _site/src/
           # Music is optional. Do not publish READMEs or historical build reports.
           find audio -maxdepth 1 -type f -name '*.mp3' -exec cp {} _site/audio/ \;
           test -s _site/index.html
