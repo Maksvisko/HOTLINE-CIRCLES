@@ -50,13 +50,6 @@
     <div id="levelSelect" class="menu level-select" style="width:min(980px, 92vw);">
         <h1 id="levelSelectTitle">Выбор уровня</h1>
 
-        <div class="chapter-switch" aria-label="Переключатель главы">
-            <button id="chapterPrev" class="chapter-arrow" onclick="switchChapter(-1)" aria-label="Предыдущая глава">◀</button>
-            <div id="chapterTitle" class="chapter-title">ГЛАВА 1</div>
-            <button id="chapterNext" class="chapter-arrow" onclick="switchChapter(1)" aria-label="Следующая глава">▶</button>
-        </div>
-
-        <!-- Chapter 1: original levels (unchanged) -->
         <div id="levelGrid" style="display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px; margin: 18px 0 10px; align-items:stretch;">
             <button class="level-button" style="max-width:none; width:100%; margin:0;" onclick="selectLevelForCharacterChoice(0)">🎓 Уровень 0 - ОБУЧЕНИЕ</button>
             <button class="level-button" style="max-width:none; width:100%; margin:0;" onclick="selectLevelForCharacterChoice(1)">📍 Уровень 1 - СКЛАД</button>
@@ -64,13 +57,6 @@
             <button class="level-button" style="max-width:none; width:100%; margin:0;" onclick="selectLevelForCharacterChoice(3)">🏭 Уровень 3 - ЗАВОД</button>
             <button class="level-button" style="max-width:none; width:100%; margin:0;" onclick="selectLevelForCharacterChoice(4)">📡 Уровень 4 - ШТАБ</button>
             <button class="level-button" style="max-width:none; width:100%; margin:0;" onclick="selectLevelForCharacterChoice(5)">💀 Уровень 5 - БОСС</button>
-        </div>
-
-        <!-- Chapter 2: levels (switchable) -->
-        <div id="levelGrid2" style="display:none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px; margin: 18px 0 10px; align-items:stretch;">
-            <button class="level-button" style="max-width:none; width:100%; margin:0; background:linear-gradient(45deg,#ff7a00,#00ffff); border-color:rgba(255,255,255,0.35);" onclick="selectChapter2Level(1)">🔥 HoTRoD</button>
-            <button class="level-button" style="max-width:none; width:100%; margin:0; background:linear-gradient(45deg,#a855f7,#ff3b3b); border-color:rgba(255,255,255,0.35);" onclick="selectChapter2Level(2)">🌤️ Skyward Ascent</button>
-            <button class="level-button" style="max-width:none; width:100%; margin:0; background:linear-gradient(45deg,#444,#888); border-color:rgba(255,255,255,0.25);" onclick="showGameAlert('ГЛАВА 2 пока в разработке.', 'Глава 2')">🚧 Скоро...</button>
         </div>
 
         <div class="menu-footer">
@@ -111,36 +97,6 @@
         </div>
         <div class="menu-footer">
             <button class="menu-button" onclick="backToLevelSelect()">Назад</button>
-        </div>
-    </div>
-
-    <!-- Chapter 2 Character Select (HoTRoD: only Jack available) -->
-    <div id="characterSelectCh2" class="menu character-select" style="display:none;">
-        <h1 id="characterSelectTitleCh2">ГЛАВА 2 — Выберите персонажа</h1>
-        <div class="character-grid" style="grid-template-columns: minmax(220px, 280px); width:min(520px, 92vw); justify-content:center; margin: 18px auto 14px;">
-            <div class="character-card" onclick="selectCharacterCh2('mesh', this)">
-                <canvas class="character-icon" width="100" height="100" id="charMesh"></canvas>
-                <div class="character-name">Jack</div>
-                <div class="character-desc">Два пистолета (ЛКМ)<br>Граната (ПКМ)<br><b>125 HP</b></div>
-            </div>
-        </div>
-        <div class="menu-footer">
-            <button class="menu-button" onclick="backToLevelSelectFromCh2()">Назад</button>
-        </div>
-    </div>
-
-    <!-- Chapter 2 Character Select (Skyward Ascent: only Skyler available) -->
-    <div id="characterSelectCh2L2" class="menu character-select" style="display:none;">
-        <h1 id="characterSelectTitleCh2L2">ГЛАВА 2 — Выберите персонажа</h1>
-        <div class="character-grid" style="grid-template-columns: minmax(220px, 280px); width:min(520px, 92vw); justify-content:center; margin: 18px auto 14px;">
-            <div class="character-card" onclick="selectCharacterCh2L2('skyler', this)">
-                <canvas class="character-icon" width="100" height="100" id="charSkyler"></canvas>
-                <div class="character-name">Skyler</div>
-                <div class="character-desc">ПП (3 пули) (ЛКМ)<br>Рывок (ПКМ)<br><b>100 HP</b></div>
-            </div>
-        </div>
-        <div class="menu-footer">
-            <button class="menu-button" onclick="backToLevelSelectFromCh2L2()">Назад</button>
         </div>
     </div>
 
@@ -211,6 +167,9 @@
         </div>
     </div>
 
+    <script src="src/world.js"></script>
+    <script src="src/levels.js"></script>
+    <script src="src/effects.js"></script>
     <script src="src/game.js"></script>
 </body>
 </html>
